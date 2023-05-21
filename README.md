@@ -3,7 +3,7 @@ Questo micro modulo e' pensato per dotare i modelli in scala delle tipiche *lant
 
 **Codice Identificativo Progetto: TFX007**
 
-**Ultima Revisione HardWare: 1.00**
+**Ultima Revisione HardWare: 1.01**
 
 **Ultima Revisione SoftWare: 4.00**
 
@@ -93,7 +93,7 @@ I **File Gerber**, il **BOM** e il file **Pick and Place** sono nel file **.Zip*
 
 ## Caratteristiche della Scheda
 Di seguito sono riportate le caratteristiche della scheda, poi spiegate in dettaglio nei vari paragrafi dedicati.
-- [Micro Dimensions](#micro-dimensioni): 10 x 10.5mm
+- [Micro Dimensions](#micro-dimensioni): 11x 11mm
 - [MCP16331](#chip-step-down-buck-mcp16331) to power module at 3.3v
 - Module can be operate with all systems: [Analog CC, Analog AC and Digital](#ponte-di-diodi)
 - [Builtin](#resistori-led-incorporati) 1kOhm lamps resistors
@@ -106,8 +106,8 @@ Di seguito sono riportate le caratteristiche della scheda, poi spiegate in detta
 <img src="https://github.com/TheFidax/TFX007_MICRO_MODULO_LANTERNE_DI_CODA/blob/main/Images/modulo_sopra.jpg" width="1280">
 
 Le dimensioni di questo modulo sono le seguenti (con la scritta TFX in alto):
-- Altezza:    10mm
-- Larghezza:  10,5mm
+- Altezza:    11mm
+- Larghezza:  11mm
 - Spessore:   4,3mm
 
 ------------
