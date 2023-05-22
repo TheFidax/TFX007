@@ -53,11 +53,8 @@ int main() {
     PRR = (1<<PRADC);                                                           // Abilito la possibilita' di risparmiare energia dal modulo ADC
            
     DDRB = 0b0011;                                                              // Imposto i pin PB1 e PB0 come OUTPUT
-                                                                                // Lascio un riscontro visivo per indicare che il modulo e' pronto
-    LANT1_ON;                                                                   // Accendo la lanterna 1
-    LANT2_ON;                                                                   // Accendo la lanterna 2
-        
-                                                                                // Imposto il Timer0 per gestire il lampeggio
+    
+    // Imposto il Timer0 per gestire il lampeggio
     TIMER0_DISABLE_OVERFLOW_INTERRUPT;                                          // Disattivo il timer
     TIMER0_RESET_CCONTROLS_REGISTERS;                                           // Eseguo il Reset dei registri di controllo
     TIMER0_ENABLE_OVERFLOW_INTERRUPT;                                           // Attivo l' ISR per Overflow
