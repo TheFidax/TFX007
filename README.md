@@ -5,23 +5,23 @@ Questo micro modulo e' pensato per dotare i modelli in scala delle tipiche *lant
 
 **Ultima Revisione HardWare: 1.01**
 
-**Ultima Revisione SoftWare: 4.00**
+**Ultima Revisione FirmWare: 4.00**
 
 **Alcune Immagini Dimostrative:**
 
 - Modulo Faccia Superiore
 
-<img src="https://github.com/TheFidax/TFX007_MICRO_MODULO_LANTERNE_DI_CODA/blob/main/Images/modulo_sopra.jpg" width="1280">
+<img src="https://github.com/TheFidax/TFX007/blob/main/Images/modulo_sopra.jpg" width="1280">
 
 - Modulo Faccia Inferiore
 
-<img src="https://github.com/TheFidax/TFX007_MICRO_MODULO_LANTERNE_DI_CODA/blob/main/Images/modulo_sotto.jpg" width="1280">
+<img src="https://github.com/TheFidax/TFX007/blob/main/Images/modulo_sotto.jpg" width="1280">
 
 - Modulo Montato su Carrozza Corbellini Hachette e Dimostrazione Lanterne
 
-<img src="https://github.com/TheFidax/TFX007_MICRO_MODULO_LANTERNE_DI_CODA/blob/main/Images/modulo_montato.jpg" width="1280">
-<img src="https://github.com/TheFidax/TFX007_MICRO_MODULO_LANTERNE_DI_CODA/blob/main/Images/lanterna_sinistra.jpg" width="1280">
-<img src="https://github.com/TheFidax/TFX007_MICRO_MODULO_LANTERNE_DI_CODA/blob/main/Images/lanterna_destra.jpg" width="1280">
+<img src="https://github.com/TheFidax/TFX007/blob/main/Images/modulo_montato.jpg" width="1280">
+<img src="https://github.com/TheFidax/TFX007/blob/main/Images/lanterna_sinistra.jpg" width="1280">
+<img src="https://github.com/TheFidax/TFX007/blob/main/Images/lanterna_destra.jpg" width="1280">
 
 ------------
 
@@ -52,7 +52,7 @@ Questo micro modulo e' pensato per dotare i modelli in scala delle tipiche *lant
 
 Nella seguente immagine sono riportati i collegamenti elettrici del Modulo:
 
-<img src="https://github.com/TheFidax/TFX007_MICRO_MODULO_LANTERNE_DI_CODA/blob/main/Images/collegamenti.jpg" width="1280">
+<img src="https://github.com/TheFidax/TFX007/blob/main/Images/collegamenti.jpg" width="1280">
 
 *Spiegazione*:
 - Rotaie: Queste due piazzole sono destinate alle prese di corrente del rotabile, sono infatti collegate al ponte di diodi interno per l'alimentazione del Modulo.</br>
@@ -73,7 +73,7 @@ Nella seguente immagine sono riportati i collegamenti elettrici del Modulo:
 ------------
 
 ## FirmWare
-Il Firmware dedicato e' presente sotto la cartella [FirmWare](https://github.com/TheFidax/TFX007_MICRO_MODULO_LANTERNE_DI_CODA/tree/main/FirmWare), per poterlo caricare è consigliata la seguente [Scheda di Prototipizzazione](xxx) e il programmatore [USBasp](https://www.fischl.de/usbasp/).</br>
+Il Firmware dedicato e' presente sotto la cartella [FirmWare](https://github.com/TheFidax/TFX007/tree/main/FirmWare), per poterlo caricare è consigliata la seguente [Scheda di Prototipizzazione](xxx) e il programmatore [USBasp](https://www.fischl.de/usbasp/).</br>
 Le cifre finali del file .HEX identificano la versione del FirmWare.
 
 **NOTA: *E' INDISPENSABILE* CARICARE IL FIRMWARE *PRIMA* DELL'ASSEMBLAGGIO! Pena l'impossibilita' di programmre il Chip ATtiny10**.
@@ -85,7 +85,7 @@ La cartella *.Zip* include il codice sorgente e il progetto comodamente visionab
 ## HardWare
 Il progetto del Micro Modulo e' disponibile qui: https://workspace.circuitmaker.com/Projects/Details/luca-fidanza/Micro-RedLights-Module .</br>
 **Viene rilasciato con la seguente Licenza**: https://creativecommons.org/licenses/by-nc-nd/4.0/ .</br>
-I **File Gerber**, il **BOM** e il file **Pick and Place** sono nel file **.Zip** disponibile sotto la cartella [HardWare](https://github.com/TheFidax/TFX007_MICRO_MODULO_LANTERNE_DI_CODA/tree/main/HardWare).</br> 
+I **File Gerber**, il **BOM** e il file **Pick and Place** sono nel file **.Zip** disponibile sotto la cartella [HardWare](https://github.com/TheFidax/TFX007/tree/main/HardWare).</br> 
 
 **NOTA**: Lo spessore *consigliato* del PCB per questa scheda è di: **0,6mm**
 
@@ -103,7 +103,7 @@ Di seguito sono riportate le caratteristiche della scheda, poi spiegate in detta
 ------------
 
 ### Micro Dimensioni
-<img src="https://github.com/TheFidax/TFX007_MICRO_MODULO_LANTERNE_DI_CODA/blob/main/Images/modulo_sopra.jpg" width="1280">
+<img src="https://github.com/TheFidax/TFX007/blob/main/Images/modulo_sopra.jpg" width="1280">
 
 Le dimensioni di questo modulo sono le seguenti (con la scritta TFX in alto):
 - Altezza:    11mm
@@ -113,7 +113,7 @@ Le dimensioni di questo modulo sono le seguenti (con la scritta TFX in alto):
 ------------
 
 ### Ponte di Diodi
-<img src="https://github.com/TheFidax/TFX007_MICRO_MODULO_LANTERNE_DI_CODA/blob/main/Images/graetz.jpg" width="1280">
+<img src="https://github.com/TheFidax/TFX007/blob/main/Images/graetz.jpg" width="1280">
 
 Il circuito di alimentazione e' realizzato meadiante 4 diodi in configurazione [Ponte di Graetz](https://it.wikipedia.org/wiki/Raddrizzatore#Ponte_di_Graetz).</br>
 Tale configurazione permette di *raddrizzare* la tensione captata dalle prese di corrente in Conrente Continua a prescindere del sistema di alimentazione:
@@ -125,14 +125,14 @@ Tale configurazione permette di *raddrizzare* la tensione captata dalle prese di
 ------------
 
 ### Chip Step Down Buck MCP16331
-<img src="https://github.com/TheFidax/TFX007_MICRO_MODULO_LANTERNE_DI_CODA/blob/main/Images/modulo_sotto.jpg" width="1280">
+<img src="https://github.com/TheFidax/TFX007/blob/main/Images/modulo_sotto.jpg" width="1280">
 
 L'alimentazione a 3,3 volt e' fornita dal chip [Microchip MCP16331](https://www.microchip.com/wwwproducts/en/MCP16331), un regolatore di tensione di tipo [Step Down Buck](https://it.wikipedia.org/wiki/Convertitore_buck) in gradi di ricevere in ingresso tensioni fino a 50 volt e di fornire in uscita una tensione stabile a 3,3 volt con sviluppo di calore minimo.</br>
 
 ------------
 
 ### ATtiny10
-<img src="https://github.com/TheFidax/TFX007_MICRO_MODULO_LANTERNE_DI_CODA/blob/main/Images/attiny10.jpg" width="1280">
+<img src="https://github.com/TheFidax/TFX007/blob/main/Images/attiny10.jpg" width="1280">
 
 Il lampeggio asincrono e' generato dal chip [ATtiny10](https://www.microchip.com/wwwproducts/en/ATtiny10).</br>
 Questo chip opera alla tensione di 3,3v e pilota i led mediante resistori incorporati sul modulo.
@@ -142,14 +142,14 @@ Questo chip opera alla tensione di 3,3v e pilota i led mediante resistori incorp
 ------------
 
 ### Restori LED Incorporati
-<img src="https://github.com/TheFidax/TFX007_MICRO_MODULO_LANTERNE_DI_CODA/blob/main/Images/resistori_led.jpg" width="1280">
+<img src="https://github.com/TheFidax/TFX007/blob/main/Images/resistori_led.jpg" width="1280">
 
 Per ridurre al minimo i componenti accessori sul modulo **Sono Gia' Presenti** due resistori da **1kOHm** per i led delle lanterne.
 
 ------------
 
 ### Predisposizione Condensatore PowerPack
-<img src="https://github.com/TheFidax/TFX007_MICRO_MODULO_LANTERNE_DI_CODA/blob/main/Images/predisposizione_powerpack.jpg" width="1280">
+<img src="https://github.com/TheFidax/TFX007/blob/main/Images/predisposizione_powerpack.jpg" width="1280">
 
 Il modulo *prevede* la possibilita' di usare un condensatore esterno come power pack.
 **E' gia' presente il circuito di ricarica lenta**.
