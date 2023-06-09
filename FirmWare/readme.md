@@ -5,7 +5,7 @@
 # main.c
 
 ```c
-#define F_CPU   8000000                                                         // Frequenza di funzionamento
+#define F_CPU   1000000                                                         // Frequenza di funzionamento: 1MHz
 
 ////////////////////////////////////////////////////////////////////////////////
 /* Librerie */
@@ -20,20 +20,31 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-/* Tempistiche Timer */
-// Durata del 'Tick' = 256 (256 cicli per un 1 tick del timer) / 8000000 = 3,2 x 10^-5 S = 32 * 10^-6 uS
-#define TICKS_TIMING            ( 32 )
-// Calcola il numero Ticks partendo da un generico tempo in mS: T=XmS = X * 10^-3 -> n' Tick = ( (X * (10^(-3))) / (32 * 10^(-6)) )
-// Lavoro SOLO in positivo quindi: n' Tick = ( (X * (10^(3))) / (32 ) )
-#define TICKS_GENERIC_MS(x)     ( ((uint32_t)x * 1000 ) / TICKS_TIMING )
-#define TICKS_T_ON              TICKS_GENERIC_MS(T_ON)  //( 625 )
-#define TICKS_T_OFF             TICKS_GENERIC_MS(T_OFF) //( 20625 ) 
+/*  Tempistiche Timer 
+ * 
+ *  1 'Ticks' ha durata (espressa in uS) pari a:
+ *  Prescaler   /   F_CPU
+ *  256         /   1000000     = 2,56 x 10^-4 Secondi (0,000256 Secondi)
+ * 
+ * 
+ * 
+ *  Conversione di un T generico, espresso in mS, in un numero di 'Ticks':
+ *  Converto il T in uS
+ *      (   T in mS   *   (   10^(-3) )   )
+ *  Trovato il tempo in uS lo divido per il tempo necessario ad ogni 'Tick' per scoprire quanti 'Ticks' sono presenti nel Tempo
+ *  (   (   T in mS   *   (   10^(-3) )   )   /   (   256 *   10^(-6) )   )
+ */
+
+#define TICKS_TIMING            ( 256 )                                         // Durata, in uS, di un 'Ticks'
+#define TICKS_GENERIC_MS(x)     ( ((uint32_t)x * 1000 ) / TICKS_TIMING )        // Converte un Tempo in mS in 'Ticks' (lavoro con numeri positivi perchè la ALU e' ridotta su ATtiny10)
+#define TICKS_T_ON              TICKS_GENERIC_MS(T_ON)                          // Numero di 'Ticks' corrrispondenti al tempo in cui la lanterna e' Accesa
+#define TICKS_T_OFF             TICKS_GENERIC_MS(T_OFF)                         // Numero di 'Ticks' corrrispondenti al tempo in cui la lanterna e' Spenta 
 
 /* Comandi 'rapidi' */
-#define LANT1_ON    ( PORTB |= (1 << PORTB0) )
-#define LANT1_OFF   ( PORTB &= ~( 1 << PORTB0) )
-#define LANT2_ON    ( PORTB |= (1 << PORTB1) )
-#define LANT2_OFF   ( PORTB &= ~( 1 << PORTB1) )
+#define LANT1_ON    ( PORTB |= (1 << PORTB0) )                                  // Porto a livello logico Alto il pin B0    (Accendo Lanterna 1)
+#define LANT1_OFF   ( PORTB &= ~( 1 << PORTB0) )                                // Porto a livello logico Basso il pin B0   (Spengo Lanterna 1)
+#define LANT2_ON    ( PORTB |= (1 << PORTB1) )                                  // Porto a livello logico Alto il pin B1    (Accendo Lanterna 2)
+#define LANT2_OFF   ( PORTB &= ~( 1 << PORTB1) )                                // Porto a livello logico Basso il pin B1   (Spengo Lanterna 2)
 
 ////////////////////////////////////////////////////////////////////////////////
 /* Prototipi */
@@ -52,7 +63,7 @@ int main() {
     /* SETUP */
     
     CCP = 0xD8;                                                                 // Abilito la modifica dei registri protetti (dal datasheet)
-    CLKPSR = 0b0000;                                                            // Imposto il 'prescaler' a 1 : frequenza 8MHz
+    CLKPSR = 0b0011;                                                            // Imposto il 'prescaler' a 8 : frequenza 1MHz
     
     asyncDelayTicks = TICKS_GENERIC_MS(2 * getRandom());                        // Calcolo un valore 'random' di 'ticks' come sfasamento tra le due lanterne
 
@@ -60,15 +71,12 @@ int main() {
     PRR = (1<<PRADC);                                                           // Abilito la possibilita' di risparmiare energia dal modulo ADC
            
     DDRB = 0b0011;                                                              // Imposto i pin PB1 e PB0 come OUTPUT
-                                                                                // Lascio un riscontro visivo per indicare che il modulo e' pronto
-    LANT1_ON;                                                                   // Accendo la lanterna 1
-    LANT2_ON;                                                                   // Accendo la lanterna 2
-        
-                                                                                // Imposto il Timer0 per gestire il lampeggio
+    
+    // Imposto il Timer0 per gestire il lampeggio
     TIMER0_DISABLE_OVERFLOW_INTERRUPT;                                          // Disattivo il timer
     TIMER0_RESET_CCONTROLS_REGISTERS;                                           // Eseguo il Reset dei registri di controllo
     TIMER0_ENABLE_OVERFLOW_INTERRUPT;                                           // Attivo l' ISR per Overflow
-    TIMER0_SET_COUNTER_REGISTER(MAX_TIMER0_COUNTER);                            // Imposto il contatore del Timer al massimo -> Attivo subito l'ISR
+    TIMER0_SET_COUNTER_REGISTER(MAX_TIMER0_VALUE);                              // Imposto il contatore del Timer al massimo -> Attivo subito l'ISR
 
     sei();                                                                      // Abilito gli interrupt globali
         
@@ -98,28 +106,28 @@ ISR(TIM0_OVF_vect) {
             LANT1_ON;                                                           // Accendo la Lanterna 1
             ++nextPhase;                                                        // Incremento il contatore
             
-            TIMER0_SET_COUNTER_REGISTER((uint16_t)(MAX_TIMER0_COUNTER - TICKS_T_ON));
+            TIMER0_SET_COUNTER_REGISTER((uint16_t)(MAX_TIMER0_TICKS - TICKS_T_ON));
             break;
         }
         case 1: {                                                               // Fase 1: Lanterna Sinistra accesa, la devo spegnere
             LANT1_OFF;                                                          // Spengo la Lanterna 1
             ++nextPhase;                                                        // Incremento il contatore
             
-            TIMER0_SET_COUNTER_REGISTER((uint16_t)(MAX_TIMER0_COUNTER - asyncDelayTicks));
+            TIMER0_SET_COUNTER_REGISTER((uint16_t)(MAX_TIMER0_TICKS - asyncDelayTicks));
             break;
         }
         case 2: {                                                               // Fase 2: Tutte le Lanterne Spente -> Devo Accendere la Lanterna Destra
             LANT2_ON;                                                           // Accendo la Lanterna 2
             ++nextPhase;                                                        // Incremento il contatore
             
-            TIMER0_SET_COUNTER_REGISTER((uint16_t)(MAX_TIMER0_COUNTER - TICKS_T_ON));
+            TIMER0_SET_COUNTER_REGISTER((uint16_t)(MAX_TIMER0_TICKS - TICKS_T_ON));
             break;
         }
         case 3: {                                                               // Fase 3: Lanterna Destra accesa, la devo spegnere
             LANT2_OFF;                                                          // Spengo la Lanterna 2
             nextPhase = 0;                                                      // Azzero il contatore
             
-            TIMER0_SET_COUNTER_REGISTER((uint16_t)(MAX_TIMER0_COUNTER - (TICKS_T_OFF - asyncDelayTicks)));
+            TIMER0_SET_COUNTER_REGISTER((uint16_t)(MAX_TIMER0_TICKS - (TICKS_T_OFF - asyncDelayTicks)));
             break;
         }
     }

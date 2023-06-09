@@ -13,14 +13,25 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-/* Tempistiche Timer */
-// Durata del 'Tick' = 256 (256 cicli per un 1 tick del timer) / 1000000 = 3,2 x 10^-5 S = 256 * 10^-6 uS
-#define TICKS_TIMING            ( 256 )
-// Calcola il numero Ticks partendo da un generico tempo in mS: T=XmS = X * 10^-3 -> n' Tick = ( (X * (10^(-3))) / (256 * 10^(-6)) )
-// Lavoro SOLO in positivo quindi: n' Tick = ( (X * (10^(3))) / (256) )
-#define TICKS_GENERIC_MS(x)     ( ((uint32_t)x * 1000 ) / TICKS_TIMING )
-#define TICKS_T_ON              TICKS_GENERIC_MS(T_ON)  //( 625 )
-#define TICKS_T_OFF             TICKS_GENERIC_MS(T_OFF) //( 20625 ) 
+/*  Tempistiche Timer 
+ * 
+ *  1 'Ticks' ha durata (espressa in uS) pari a:
+ *  Prescaler   /   F_CPU
+ *  256         /   1000000     = 2,56 x 10^-4 Secondi (0,000256 Secondi)
+ * 
+ * 
+ * 
+ *  Conversione di un T generico, espresso in mS, in un numero di 'Ticks':
+ *  Converto il T in uS
+ *      (   T in mS   *   (   10^(-3) )   )
+ *  Trovato il tempo in uS lo divido per il tempo necessario ad ogni 'Tick' per scoprire quanti 'Ticks' sono presenti nel Tempo
+ *  (   (   T in mS   *   (   10^(-3) )   )   /   (   256 *   10^(-6) )   )
+ */
+
+#define TICKS_TIMING            ( 256 )                                         // Durata, in uS, di un 'Ticks'
+#define TICKS_GENERIC_MS(x)     ( ((uint32_t)x * 1000 ) / TICKS_TIMING )        // Converte un Tempo in mS in 'Ticks' (lavoro con numeri positivi perchè la ALU e' ridotta su ATtiny10)
+#define TICKS_T_ON              TICKS_GENERIC_MS(T_ON)                          // Numero di 'Ticks' corrrispondenti al tempo in cui la lanterna e' Accesa
+#define TICKS_T_OFF             TICKS_GENERIC_MS(T_OFF)                         // Numero di 'Ticks' corrrispondenti al tempo in cui la lanterna e' Spenta 
 
 /* Comandi 'rapidi' */
 #define LANT1_ON    ( PORTB |= (1 << PORTB0) )                                  // Porto a livello logico Alto il pin B0    (Accendo Lanterna 1)
