@@ -94,14 +94,14 @@ MP_PROCESSOR_OPTION=ATtiny10
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: compile
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
-${OBJECTDIR}/src/main.o: src/main.c  .generated_files/flags/default/3c5aaf9aa72db071c2e891f79c347250fa840178 .generated_files/flags/default/5db5006635fa1ccab10dd03a4dcc97b88826d8c1
+${OBJECTDIR}/src/main.o: src/main.c  .generated_files/flags/default/3c5aaf9aa72db071c2e891f79c347250fa840178 .generated_files/flags/default/88421e8336fb02f76553b4d44a9320352df6ff5e
 	@${MKDIR} "${OBJECTDIR}/src" 
 	@${RM} ${OBJECTDIR}/src/main.o.d 
 	@${RM} ${OBJECTDIR}/src/main.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1 -g -DDEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1 -gdwarf-2  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp="${DFP_DIR}/xc8"  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -funsigned-char -funsigned-bitfields -mext=cci -Wall -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/src/main.o.d" -MT "${OBJECTDIR}/src/main.o.d" -MT ${OBJECTDIR}/src/main.o -o ${OBJECTDIR}/src/main.o src/main.c 
 	
 else
-${OBJECTDIR}/src/main.o: src/main.c  .generated_files/flags/default/c60d3ac2392363bb677fffc6cd07dddebf0d27e3 .generated_files/flags/default/5db5006635fa1ccab10dd03a4dcc97b88826d8c1
+${OBJECTDIR}/src/main.o: src/main.c  .generated_files/flags/default/c60d3ac2392363bb677fffc6cd07dddebf0d27e3 .generated_files/flags/default/88421e8336fb02f76553b4d44a9320352df6ff5e
 	@${MKDIR} "${OBJECTDIR}/src" 
 	@${RM} ${OBJECTDIR}/src/main.o.d 
 	@${RM} ${OBJECTDIR}/src/main.o 

@@ -3,7 +3,7 @@
     <type>com.microchip.mplab.nbide.embedded.makeproject</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/make-project/1">
-            <name>TailLightsMicroModule</name>
+            <name>TFX007</name>
             <creation-uuid>f8441356-3cc5-4ff5-8cc5-6878a5594a2e</creation-uuid>
             <make-project-type>0</make-project-type>
             <c-extensions>c</c-extensions>

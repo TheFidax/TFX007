@@ -15,17 +15,21 @@
 
 /*  Tempistiche Timer 
  * 
- *  1 'Ticks' ha durata (espressa in uS) pari a:
+ *  1 'Ticks' ha durata pari a:
  *  Prescaler   /   F_CPU
- *  256         /   1000000     = 2,56 x 10^-4 Secondi (0,000256 Secondi)
+ *  256         /   1000000     = 2,56 x 10^-4 Secondi 
+ *  0,000256 Secondi = 256uS
  * 
  * 
+ *  Conversione di un tempo generico T (espresso in mS) in un numero di 'Ticks':
  * 
- *  Conversione di un T generico, espresso in mS, in un numero di 'Ticks':
- *  Converto il T in uS
- *      (   T in mS   *   (   10^(-3) )   )
- *  Trovato il tempo in uS lo divido per il tempo necessario ad ogni 'Tick' per scoprire quanti 'Ticks' sono presenti nel Tempo
- *  (   (   T in mS   *   (   10^(-3) )   )   /   (   256 *   10^(-6) )   )
+ *  Converto T da mS a uS
+ *  TmS  *  (  10^(3)  )
+ * 
+ * 
+ *  Trovato il tempo in uS, lo divido per la durata di 1 'Tick', scopro così quanti 'Ticks' sono presenti in T
+ *  TmS  *  (  10^(3)  )  /  256
+ *
  */
 
 #define TICKS_TIMING            ( 256 )                                         // Durata, in uS, di un 'Ticks'
