@@ -56,7 +56,7 @@ static uint32_t asyncDelayTicks;                                                
 ////////////////////////////////////////////////////////////////////////////////
 /* MAIN */
 
-int main() {    
+int main(void){    
     /* SETUP */
     
     CCP = 0xD8;                                                                 // Abilito la modifica dei registri protetti (dal datasheet)
