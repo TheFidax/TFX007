@@ -44,12 +44,6 @@ else
 COMPARISON_BUILD=
 endif
 
-ifdef SUB_IMAGE_ADDRESS
-
-else
-SUB_IMAGE_ADDRESS_COMMAND=
-endif
-
 # Object Directory
 OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 
@@ -110,14 +104,14 @@ endif
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: compile
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
-${OBJECTDIR}/src/main.o: src/main.c  .generated_files/flags/default/935b02545a9961b312a0e4c4e37371aa77b28056 .generated_files/flags/default/ecedf81fdd1d47cae8ebc6910f645c29145279ee
+${OBJECTDIR}/src/main.o: src/main.c  .generated_files/flags/default/935b02545a9961b312a0e4c4e37371aa77b28056 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
 	@${MKDIR} "${OBJECTDIR}/src" 
 	@${RM} ${OBJECTDIR}/src/main.o.d 
 	@${RM} ${OBJECTDIR}/src/main.o 
 	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=attiny10 ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1 -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -MD -MP -MF "${OBJECTDIR}/src/main.o.d" -MT "${OBJECTDIR}/src/main.o.d" -MT ${OBJECTDIR}/src/main.o  -o ${OBJECTDIR}/src/main.o src/main.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
 	
 else
-${OBJECTDIR}/src/main.o: src/main.c  .generated_files/flags/default/2e42ebf7ad57c2b0e3982cd277d597aad37959b9 .generated_files/flags/default/ecedf81fdd1d47cae8ebc6910f645c29145279ee
+${OBJECTDIR}/src/main.o: src/main.c  .generated_files/flags/default/2e42ebf7ad57c2b0e3982cd277d597aad37959b9 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
 	@${MKDIR} "${OBJECTDIR}/src" 
 	@${RM} ${OBJECTDIR}/src/main.o.d 
 	@${RM} ${OBJECTDIR}/src/main.o 
@@ -171,7 +165,7 @@ endif
 # Enable dependency checking
 .dep.inc: .depcheck-impl
 
-DEPFILES=$(shell mplabwildcard ${POSSIBLE_DEPFILES})
+DEPFILES=$(wildcard ${POSSIBLE_DEPFILES})
 ifneq (${DEPFILES},)
 include ${DEPFILES}
 endif
